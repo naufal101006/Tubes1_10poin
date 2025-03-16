@@ -1,0 +1,11 @@
+{
+    "name": "10 poin",
+    "version": "1.0",
+    "authors": [ "naufal101006", "farrellja1"],
+    "description": "Mencari tempat yang memiliki sedikit tank.",
+    "homepage": "",
+    "countryCodes": [ "id" ],
+    "platform": ".Net",
+    "programmingLang": "C#"
+  }
+  
