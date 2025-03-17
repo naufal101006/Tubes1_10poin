@@ -1,0 +1,11 @@
+{
+    "name": "10 poin",
+    "version": "1.0",
+    "authors": [ "naufal101006", "farrellja1"],
+    "description": "Mencari tank yang sekarat sebelum menembak.",
+    "homepage": "",
+    "countryCodes": [ "id" ],
+    "platform": ".Net",
+    "programmingLang": "C#"
+  }
+  
