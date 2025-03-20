@@ -78,6 +78,7 @@ public class HideAndStall : Bot
                 }
 
                 double Minimum = 9999;
+                const double THRESHOLD = 0.4;
                 double[] GridCoords = new double[2] {0, 0};
                 for (int i = 0; i < Grid.Length; i++) {
                     for (int j = 0; j < Grid[0].Length; j++) {
@@ -86,6 +87,9 @@ public class HideAndStall : Bot
                             GridCoords[1] = ((double)i + 1.0f/2.0f) * ArenaHeight/8;
 
                             Minimum = Grid[i][j];
+                            if (Minimum < THRESHOLD) {
+                                break;
+                            }
                         }
                     }
                 }
