@@ -1,0 +1,11 @@
+{
+    "name": "10 poin",
+    "version": "1.0",
+    "authors": [ "naufal101006", "farrellja1"],
+    "description": "Menembak tank yang menabrak.",
+    "homepage": "",
+    "countryCodes": [ "id" ],
+    "platform": ".Net",
+    "programmingLang": "C#"
+  }
+  
