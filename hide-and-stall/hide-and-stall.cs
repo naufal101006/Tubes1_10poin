@@ -35,8 +35,6 @@ public class HideAndStall : Bot
         double[] LastTarget = {-1, -1};
         Random RNG = new();
 
-        Console.WriteLine($"{ArenaWidth}, {ArenaHeight}");
-
         TurnRadarLeft(360);
         while (IsRunning)
         {
@@ -46,6 +44,7 @@ public class HideAndStall : Bot
             CalculateGrid();
             int[] CurrentGrid = new int[2] {(int)(X*4/ArenaWidth), (int)(Y*4/ArenaHeight)};
 
+            // Grid is too dense
             if (Grid[CurrentGrid[0]][CurrentGrid[1]] > 0.4) {
                 double Minimum = 9999;
                 double[] GridCoords = new double[2] {0, 0};
@@ -83,6 +82,7 @@ public class HideAndStall : Bot
                 }
             }
             
+            // If not moving to different grid, jitter
             if (DoJitter) {
                 SetTurnLeft(RNG.NextDouble()*360);
                 Forward((RNG.Next(0, 2)*2-1) * RNG.Next(1, 3)*18);
@@ -97,12 +97,14 @@ public class HideAndStall : Bot
         RobotList[e.ScannedBotId] =  coords;
     }
 
+    // When hitting a bot, move 90deg to dodge
     public override void OnHitBot(HitBotEvent e)
     {
         TurnLeft(BearingTo(e.X, e.Y) + 90);
         Forward(64);
     }
 
+    // Calculate density grid
     private void CalculateGrid() {
         Grid = new double[4][] {
             new double[4] {0, 0, 0, 0},
@@ -116,6 +118,7 @@ public class HideAndStall : Bot
             Grid[(int)(Coords.Value[1]*4 / ArenaHeight)][(int)(Coords.Value[0]*4 / ArenaWidth)] += 1;
         }
         
+        // Diffuse grid
         for (int k = 0; k < 2; k++) {
             for (int i = 0; i < Grid.Length; i++)
             {
@@ -131,6 +134,7 @@ public class HideAndStall : Bot
         }
     }
 
+    // Get grid neighbour, reflecting border
     static double GetN(double[][] Grid, int i, int j, int ic, int jc) {
         if (i+ic < 0 || i+ic >= Grid.Length || j+jc < 0 || j+jc >= Grid[0].Length) {
             return Grid[i][j];

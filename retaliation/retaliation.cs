@@ -3,6 +3,7 @@ using System.Drawing;
 using Robocode.TankRoyale.BotApi.Events;
 using System;
 
+// HitBotEvent but with X and Y setter
 public class TargetBot {
     public int VictimId { get; }
 
@@ -55,10 +56,12 @@ public class Retaliation : Bot
         while (IsRunning) {
             SetTurnRadarLeft(360);
 
+            // When no target, jitter
             if (TurnNumber % 80 == 0 && TargetBot is null) {
                 SetForward(256 * (TurnNumber % 160 / 40 - 1));
             }
 
+            // Fire at target
             if (TargetBot is not null) {
                 double Distance = DistanceTo(TargetBot.X, TargetBot.Y);
 
@@ -78,6 +81,7 @@ public class Retaliation : Bot
         }
     }
     
+    // When hit, set target
     public override void OnHitBot(HitBotEvent e) {
         if (TargetBot is null) {
             TargetBot = new TargetBot(e.VictimId, e.Energy, e.X, e.Y, e.IsRammed);
@@ -90,7 +94,8 @@ public class Retaliation : Bot
             TargetBot = null;
         }
     }
-
+    
+    // Update target
     public override void OnScannedBot(ScannedBotEvent e)
     {
         if (e.ScannedBotId == TargetBot?.VictimId) {

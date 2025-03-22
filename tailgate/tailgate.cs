@@ -34,7 +34,8 @@ public class Tailgate : Bot
         // Repeat while the bot is running
         while (IsRunning) {
             SetTurnRadarLeft(360);
-
+            
+            // Follow TailgateTarget
             if (TailgateTarget is not null) {
                 double TargetX = TailgateTarget.X - 36*Math.Cos(TailgateTarget.Direction/180 * Math.PI);
                 double TargetY = TailgateTarget.Y - 36*Math.Sin(TailgateTarget.Direction/180 * Math.PI);
@@ -48,6 +49,7 @@ public class Tailgate : Bot
 
             }
 
+            // Shoot GunTarget
             if (GunTarget is not null) {
                 double Direction = GunBearingTo(GunTarget.X, GunTarget.Y);
 

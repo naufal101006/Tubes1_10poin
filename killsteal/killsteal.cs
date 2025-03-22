@@ -32,10 +32,12 @@ public class Killsteal : Bot
         TracksColor = Color.FromArgb(0x55, 0x55, 0x55);
         GunColor = Color.FromArgb(0x0c, 0x70, 0x4c);
 
+        // Free up turning for more freedom
         AdjustGunForBodyTurn = false;
         AdjustRadarForGunTurn = false;
         AdjustRadarForBodyTurn = false;
 
+        // Move to center
         double AngleToMiddle = BearingTo(ArenaWidth/2, ArenaHeight/2);
         double DistanceToMiddle = DistanceTo(ArenaWidth/2, ArenaHeight/2);
         if (AngleToMiddle > 0) {
@@ -70,10 +72,12 @@ public class Killsteal : Bot
                 SetTurnRadarLeft(360);
             }
 
+            // Stale target, stop targetting
             if (TurnNumber - TargetBot?.TurnNumber >= 10) {
                 TargetBot = null;
             }
 
+            // When no target, jitter
             if (TurnNumber % 40 == 0 && TargetBot is null) {
                 SetForward(64 * (TurnNumber % 80 / 20 - 1));
             }
@@ -81,6 +85,7 @@ public class Killsteal : Bot
         }
     }
 
+    // Find bot with <25 Energy
     public override void OnScannedBot(ScannedBotEvent e)
     {
         if (TargetBot?.ScannedBotId == e.ScannedBotId || (e.Energy < 25 && (TargetBot is null || e.Energy < TargetBot.Energy))) {
