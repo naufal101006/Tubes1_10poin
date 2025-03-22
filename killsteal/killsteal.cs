@@ -83,7 +83,7 @@ public class Killsteal : Bot
 
     public override void OnScannedBot(ScannedBotEvent e)
     {
-        if (e.Energy < 25 && (TargetBot is null || e.Energy < TargetBot.Energy)) {
+        if (TargetBot?.ScannedBotId == e.ScannedBotId || (e.Energy < 25 && (TargetBot is null || e.Energy < TargetBot.Energy))) {
             TargetBot = e;
         }
     }
