@@ -85,10 +85,10 @@ public class Killsteal : Bot
         }
     }
 
-    // Find bot with <25 Energy
+    // Find bot with <25 Energy or last bot
     public override void OnScannedBot(ScannedBotEvent e)
     {
-        if (TargetBot?.ScannedBotId == e.ScannedBotId || (e.Energy < 25 && (TargetBot is null || e.Energy < TargetBot.Energy))) {
+        if (TargetBot?.ScannedBotId == e.ScannedBotId || (e.Energy < 25 && (TargetBot is null || e.Energy < TargetBot.Energy)) || EnemyCount < 2) {
             TargetBot = e;
         }
     }
