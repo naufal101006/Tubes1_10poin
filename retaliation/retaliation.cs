@@ -56,7 +56,7 @@ public class Retaliation : Bot
         while (IsRunning) {
             SetTurnRadarLeft(360);
 
-            // When no target, jitter
+            // When no target, wobble
             if (TurnNumber % 80 == 0 && TargetBot is null) {
                 SetForward(256 * (TurnNumber % 160 / 40 - 1));
             }

@@ -77,7 +77,7 @@ public class Killsteal : Bot
                 TargetBot = null;
             }
 
-            // When no target, jitter
+            // When no target, wobble
             if (TurnNumber % 40 == 0 && TargetBot is null) {
                 SetForward(64 * (TurnNumber % 80 / 20 - 1));
             }
